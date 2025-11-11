@@ -11,9 +11,9 @@ import {
 
 const tools = [
   {
-    name: "PDF a Imágenes",
-    description: "Convierte tus PDFs en imágenes de alta calidad",
-    path: "/tools/pdf-to-images",
+    name: "Convierte PDFs",
+    description: "Convierte tus PDFs en diferentes formatos (imágenes, Word, etc.)",
+    path: "/tools/pdf-to-convert",
     icon: FileImage,
   },
   {
@@ -35,18 +35,18 @@ const tools = [
     icon: Compress,
   },
   {
-    name: "PDF a Word",
-    description: "Convierte tus PDFs en documentos Word editables",
-    path: "/tools/pdf-to-word",
-    icon: FileText,
-  },
-  {
     name: "Ordenar Páginas",
     description:
       "Reordena las páginas de tus PDFs fácilmente. Elimina o añade páginas según necesites",
     path: "/tools/reorder-pdf",
     icon: ListOrdered,
   },
+  {
+    name: "Editar PDF",
+    description: "Edita el contenido de tus archivos PDF de forma sencilla",
+    path: "/tools/edit-pdf",
+    icon: FileText,
+  }
 ];
 
 export default function Home() {
