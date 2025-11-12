@@ -110,7 +110,7 @@ export default function CompressPdf() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-blue-50 via-indigo-50 to-purple-50 p-6">
-      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full border border-gray-100">
+      <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-2xl w-full border border-gray-100">
         <Link href="/">← Volver al inicio</Link>
 
         <div className="flex items-center justify-center mb-6">

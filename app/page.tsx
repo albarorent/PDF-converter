@@ -43,7 +43,7 @@ const tools = [
   },
   {
     name: "Editar PDF",
-    description: "Edita el contenido de tus archivos PDF de forma sencilla",
+    description: "Editar PDFs en línea: Añade texto, imágenes y anotaciones fácilmente",
     path: "/tools/edit-pdf",
     icon: FileText,
   }
