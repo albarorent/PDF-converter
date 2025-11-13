@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { jsPDF } from "jspdf";
 import {
   Upload,
   Type,
@@ -19,6 +20,7 @@ import {
   PenTool,
   Eraser,
 } from "lucide-react";
+import Link from "next/link";
 
 type Tool =
   | "select"
@@ -81,7 +83,7 @@ export default function EditPdf() {
   const [currentDrawing, setCurrentDrawing] = useState<
     { x: number; y: number }[]
   >([]);
-  const [zoom, setZoom] = useState(1.2);
+  const [zoom, setZoom] = useState(1.0);
   const [fontSize, setFontSize] = useState(16);
   const [color, setColor] = useState("#000000");
   const [isLoading, setIsLoading] = useState(false);
@@ -634,6 +636,7 @@ export default function EditPdf() {
   const downloadPdf = async () => {
     if (!canvasRef.current || !annotationCanvasRef.current) return;
 
+    // Combinar ambos canvas
     const combinedCanvas = document.createElement("canvas");
     const ctx = combinedCanvas.getContext("2d");
     if (!ctx) return;
@@ -644,12 +647,31 @@ export default function EditPdf() {
     ctx.drawImage(canvasRef.current, 0, 0);
     ctx.drawImage(annotationCanvasRef.current, 0, 0);
 
-    const link = document.createElement("a");
-    link.download = `${
-      pdfFile?.name.replace(".pdf", "") || "pdf"
-    }_editado_pagina_${currentPage}.png`;
-    link.href = combinedCanvas.toDataURL();
-    link.click();
+    // Convertir a imagen base64 para insertar en PDF
+    const imgData = combinedCanvas.toDataURL("image/jpeg", 1.0);
+
+    // Crear PDF con las mismas proporciones
+    const pdf = new jsPDF({
+      orientation: combinedCanvas.width > combinedCanvas.height ? "l" : "p",
+      unit: "px",
+      format: [combinedCanvas.width, combinedCanvas.height],
+    });
+
+    pdf.addImage(
+      imgData,
+      "JPEG",
+      0,
+      0,
+      combinedCanvas.width,
+      combinedCanvas.height
+    );
+
+    // Descargar con el nombre correcto
+    pdf.save(
+      `${
+        pdfFile?.name.replace(".pdf", "") || "pdf"
+      }_editado_pagina_${currentPage}.pdf`
+    );
   };
 
   const tools: { id: Tool; icon: any; label: string }[] = [
@@ -702,15 +724,20 @@ export default function EditPdf() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+    <div className="min-h-screen bg-linear-to-br from-purple-50 via-pink-50 to-blue-50">
       <div className="container mx-auto p-4">
         <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-6 text-white">
+
+          <div className="bg-linear-to-r from-blue-600 to-blue-600 p-6 text-white">
+            <Link href="/" className="text-white font-bold mb-5 ">
+              ← Volver al inicio
+            </Link>
+
             <h1 className="text-3xl font-bold mb-2">
               Editor de PDF Profesional
             </h1>
-            <p className="text-purple-100">
+            <p className="text-blue-100">
               Edita texto del PDF, añade firmas, anotaciones e imágenes
             </p>
           </div>
@@ -719,14 +746,14 @@ export default function EditPdf() {
           {!pdfFile && (
             <div className="p-8">
               <label className="block">
-                <div className="border-2 border-dashed border-purple-300 rounded-xl p-12 text-center cursor-pointer hover:border-purple-500 hover:bg-purple-50 transition-all">
+                <div className="border-2 border-dashed border-blue-300 rounded-xl p-12 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-all">
                   <input
                     type="file"
                     accept="application/pdf"
                     onChange={handleFileUpload}
                     className="hidden"
                   />
-                  <Upload className="w-16 h-16 mx-auto mb-4 text-purple-400" />
+                  <Upload className="w-16 h-16 mx-auto mb-4 text-blue-400" />
                   <p className="text-lg font-medium text-gray-700 mb-2">
                     Haz clic para subir tu PDF
                   </p>
@@ -740,7 +767,7 @@ export default function EditPdf() {
 
           {isLoading && (
             <div className="p-8 text-center">
-              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto"></div>
+              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-blue-600 mx-auto"></div>
               <p className="mt-4 text-gray-600">Cargando PDF...</p>
             </div>
           )}
@@ -761,8 +788,6 @@ export default function EditPdf() {
                         setCurrentTool(tool.id);
                         if (tool.id === "image") {
                           document.getElementById("image-upload")?.click();
-                        } else if (tool.id === "signature") {
-                          setShowSignaturePad(true);
                         } else if (tool.id === "edit") {
                           setSelectedTextElement(null);
                         }
@@ -919,7 +944,7 @@ export default function EditPdf() {
 
                   <button
                     onClick={downloadPdf}
-                    className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all font-medium text-sm"
+                    className="flex items-center gap-2 px-4 py-2 bg-linear-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:shadow-lg transition-all font-medium text-sm"
                   >
                     <Download className="w-4 h-4" />
                     <span className="hidden sm:inline">Descargar</span>

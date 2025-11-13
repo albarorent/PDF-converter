@@ -10,6 +10,7 @@ import {
 import { Loader2, Trash2, FileUp, Download, RotateCcw } from "lucide-react";
 import { SortableItem } from "@/app/components/SortableItem";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function MergePdf() {
   const [files, setFiles] = useState<File[]>([]);
@@ -165,10 +166,12 @@ export default function MergePdf() {
                       <div className="flex items-center justify-between p-3 border rounded-lg bg-gray-50 hover:bg-gray-100">
                         <div className="flex items-center gap-3">
                           {thumbnails[file.name] ? (
-                            <img
+                            <Image
                               src={thumbnails[file.name]}
                               alt={file.name}
                               className="w-12 h-16 object-cover border rounded"
+                              width={48}
+                              height={64}
                             />
                           ) : (
                             <div className="w-12 h-16 bg-gray-200 animate-pulse rounded"></div>
