@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 // ✅ Metadata mejorada
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tusitio.com"),
+  metadataBase: new URL("https://www.pdfconvertools.com/"),
   title: {
     default: "PDF Tools - Herramientas PDF Online Gratis | Convierte, Une y Comprime",
     template: "%s | PDF Tools", // Para páginas hijas: "Título página | PDF Tools"
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_ES",
-    url: "https://tusitio.com",
+    url: "https://www.pdfconvertools.com",
     siteName: "PDF Tools",
     title: "PDF Tools - Herramientas PDF Online Gratis",
     description:
@@ -94,9 +94,9 @@ export const metadata: Metadata = {
   },
   manifest: "/manifest.json",
   alternates: {
-    canonical: "https://tusitio.com",
+    canonical: "https://www.pdfconvertools.com",
     languages: {
-      "es-ES": "https://tusitio.com",
+      "es-ES": "https://www.pdfconvertools.com",
       // Agrega más idiomas si los soportas
     },
   },
@@ -144,8 +144,8 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "PDF Tools",
-              url: "https://tusitio.com",
-              logo: "https://tusitio.com/logo.png",
+              url: "https://www.pdfconvertools.com/",
+              logo: "https://www.pdfconvertools.com/logo.png",
               description:
                 "Herramientas online para convertir, unir, comprimir y editar PDFs gratis.",
               sameAs: [
@@ -156,8 +156,8 @@ export default function RootLayout({
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "Customer Service",
-                email: "contacto@tusitio.com",
-                url: "https://tusitio.com/contacto",
+                email: "contacto@pdfconvertools.com",
+                url: "https://www.pdfconvertools.com/contacto",
               },
             }),
           }}
@@ -172,7 +172,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebSite",
               name: "PDF Tools",
-              url: "https://tusitio.com",
+              url: "https://www.pdfconvertools.com",
               description:
                 "Herramientas profesionales gratuitas para gestionar archivos PDF online.",
               inLanguage: "es",
@@ -180,7 +180,7 @@ export default function RootLayout({
                 "@type": "SearchAction",
                 target: {
                   "@type": "EntryPoint",
-                  urlTemplate: "https://tusitio.com/blog?q={search_term_string}",
+                  urlTemplate: "https://www.pdfconvertools.com/blog?q={search_term_string}",
                 },
                 "query-input": "required name=search_term_string",
               },
@@ -197,7 +197,7 @@ export default function RootLayout({
               "@context": "https://schema.org",
               "@type": "WebApplication",
               name: "PDF Tools",
-              url: "https://tusitio.com",
+              url: "https://www.pdfconvertools.com",
               applicationCategory: "UtilitiesApplication",
               operatingSystem: "Any",
               offers: {

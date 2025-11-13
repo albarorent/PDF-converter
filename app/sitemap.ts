@@ -3,7 +3,7 @@ import { MetadataRoute } from "next";
 import { articles } from "./blog/data/articles";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://tusitio.com";
+  const baseUrl = "https://www.pdfconvertools.com/";
 
   // Páginas estáticas principales
   const staticPages: MetadataRoute.Sitemap = [
