@@ -110,6 +110,9 @@ export default function RootLayout({
   // Google Analytics ID
   const GA_MEASUREMENT_ID = "G-4ER9WDFR3X";
   
+  // Google AdSense ID
+  const ADSENSE_ID = "ca-pub-1769727514478016";
+  
   return (
     <html lang="es" suppressHydrationWarning>
       <body
@@ -130,6 +133,14 @@ export default function RootLayout({
             });
           `}
         </Script>
+
+        {/* Google AdSense */}
+        <Script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_ID}`}
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         {/* Schema.org - Organización */}
         <Script
           id="schema-organization"
