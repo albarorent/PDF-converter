@@ -100,6 +100,9 @@ export const metadata: Metadata = {
     google: "ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek",
   },
   category: "technology",
+  other: {
+    'google-site-verification': 'ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek',
+  },
 };
 
 export default function RootLayout({
