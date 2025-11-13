@@ -17,7 +17,7 @@ export default function AboutPage() {
   return (
     <main className="min-h-screen bg-linear-to-br from-blue-50 via-purple-50 to-pink-50">
       {/* Hero Section */}
-      <header className="bg-white border-b">
+      <div className="bg-white border-b">
         <div className="max-w-6xl mx-auto px-6 py-16 text-center">
           <h1 className="text-5xl font-bold mb-6 bg-linear-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
             Acerca de PDF Tools
@@ -28,7 +28,7 @@ export default function AboutPage() {
             rápida y accesible para todos.
           </p>
         </div>
-      </header>
+      </div>
 
       <div className="max-w-6xl mx-auto px-6 py-16">
         {/* Historia */}
