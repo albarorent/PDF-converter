@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
@@ -7,7 +6,7 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap", // Mejora rendimiento
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -16,12 +15,11 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-// ✅ Metadata mejorada
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.pdfconvertools.com/"),
   title: {
     default: "PDF Tools - Herramientas PDF Online Gratis | Convierte, Une y Comprime",
-    template: "%s | PDF Tools", // Para páginas hijas: "Título página | PDF Tools"
+    template: "%s | PDF Tools",
   },
   description:
     "Convierte, une, divide, comprime y edita archivos PDF gratis sin registro. 100% seguro con procesamiento local en tu navegador. Sin límites ni marcas de agua.",
@@ -58,7 +56,7 @@ export const metadata: Metadata = {
       "Convierte, une y edita PDFs gratis. Procesamiento 100% local y seguro sin subir archivos.",
     images: [
       {
-        url: "/og-image.png", // Crea esta imagen 1200x630px
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "PDF Tools - Herramientas PDF Online",
@@ -71,7 +69,6 @@ export const metadata: Metadata = {
     title: "PDF Tools - Convierte y Gestiona tus PDFs Online",
     description: "Herramientas PDF gratuitas. Seguro, rápido y sin límites.",
     images: ["/og-image.png"],
-    creator: "@tutwitter", // Opcional: tu cuenta de Twitter
   },
   robots: {
     index: true,
@@ -97,28 +94,28 @@ export const metadata: Metadata = {
     canonical: "https://www.pdfconvertools.com",
     languages: {
       "es-ES": "https://www.pdfconvertools.com",
-      // Agrega más idiomas si los soportas
     },
   },
   verification: {
-    google: "ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek", // Añadir después de verificar
-    // yandex: "codigo-yandex",
-    // bing: "codigo-bing",
+    google: "ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek",
   },
   category: "technology",
 };
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // ID de Google Analytics (reemplaza con el tuyo)
+  // ID de Google Analytics - REEMPLAZA CON EL TUYO
   const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
   
   return (
     <html lang="es" suppressHydrationWarning>
-      <head>
-        {/* ✅ Google Analytics 4 */}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50 text-gray-900`}
+      >
+        {/* ✅ Google Analytics 4 - Ahora ANTES del contenido */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -138,6 +135,7 @@ export default function RootLayout({
         <Script
           id="schema-organization"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -147,11 +145,6 @@ export default function RootLayout({
               logo: "https://www.pdfconvertools.com/logo.png",
               description:
                 "Herramientas online para convertir, unir, comprimir y editar PDFs gratis.",
-              sameAs: [
-                // Añade tus redes sociales
-                // "https://twitter.com/tuperfil",
-                // "https://facebook.com/tuperfil",
-              ],
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "Customer Service",
@@ -162,10 +155,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* ✅ Schema.org - WebSite con SearchAction */}
+        {/* ✅ Schema.org - WebSite */}
         <Script
           id="schema-website"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -187,10 +181,11 @@ export default function RootLayout({
           }}
         />
 
-        {/* ✅ Schema.org - WebApplication (opcional, para destacar herramientas) */}
+        {/* ✅ Schema.org - WebApplication */}
         <Script
           id="schema-webapp"
           type="application/ld+json"
+          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
@@ -219,25 +214,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* ✅ Google AdSense (descomentar después de aprobación) */}
-        {/* <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        /> */}
-
-        {/* ✅ Preconnect para mejorar rendimiento */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://www.google-analytics.com" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-      </head>
-
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50 text-gray-900`}
-      >
-        {/* ✅ Skip to main content (accesibilidad y SEO) */}
+        {/* Skip to main content */}
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 bg-blue-600 text-white px-4 py-2 z-50"
@@ -247,7 +224,7 @@ export default function RootLayout({
 
         {children}
 
-        {/* ✅ Noscript para usuarios sin JavaScript */}
+        {/* Noscript */}
         <noscript>
           <div style={{
             padding: '20px',
