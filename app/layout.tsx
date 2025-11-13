@@ -108,7 +108,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   // Google Analytics ID
-  const GA_MEASUREMENT_ID = "G-MJ546XTPCL";
+  const GA_MEASUREMENT_ID = "G-4ER9WDFR3X";
   
   return (
     <html lang="es" suppressHydrationWarning>
