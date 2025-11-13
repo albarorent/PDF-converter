@@ -101,13 +101,12 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "tu-codigo-google-search-console", // Añadir después de verificar
+    google: "ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek", // Añadir después de verificar
     // yandex: "codigo-yandex",
     // bing: "codigo-bing",
   },
   category: "technology",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{

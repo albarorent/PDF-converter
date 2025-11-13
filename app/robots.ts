@@ -2,7 +2,7 @@
 import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://www.pdfconvertools.com/";
+  const baseUrl = "https://www.pdfconvertools.com";
 
   return {
     rules: [
