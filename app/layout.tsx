@@ -100,9 +100,6 @@ export const metadata: Metadata = {
     google: "ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek",
   },
   category: "technology",
-  other: {
-    'google-site-verification': 'ixAcNqiCLjHmy5crNziI6_2lOgMjYCPieNvzAcOnBek',
-  },
 };
 
 export default function RootLayout({
@@ -110,15 +107,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // ID de Google Analytics - REEMPLAZA CON EL TUYO
-  const GA_MEASUREMENT_ID = "G-XXXXXXXXXX";
+  // Google Analytics ID
+  const GA_MEASUREMENT_ID = "G-MJ546XTPCL";
   
   return (
     <html lang="es" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gray-50 text-gray-900`}
       >
-        {/* ✅ Google Analytics 4 - Ahora ANTES del contenido */}
+        {/* Google Analytics 4 */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
           strategy="afterInteractive"
@@ -133,8 +130,7 @@ export default function RootLayout({
             });
           `}
         </Script>
-
-        {/* ✅ Schema.org - Organización */}
+        {/* Schema.org - Organización */}
         <Script
           id="schema-organization"
           type="application/ld+json"
@@ -158,7 +154,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* ✅ Schema.org - WebSite */}
+        {/* Schema.org - WebSite */}
         <Script
           id="schema-website"
           type="application/ld+json"
@@ -184,7 +180,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* ✅ Schema.org - WebApplication */}
+        {/* Schema.org - WebApplication */}
         <Script
           id="schema-webapp"
           type="application/ld+json"
