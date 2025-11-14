@@ -1,126 +1,129 @@
-// app/api/compress-pdf/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, readFile, unlink } from 'fs/promises';
-import { join } from 'path';
-import { tmpdir } from 'os';
-import { randomUUID } from 'crypto';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-
-const execAsync = promisify(exec);
-
-// Niveles de compresión disponibles
-const COMPRESSION_SETTINGS = {
-  high: '/screen',      // Máxima compresión (72 DPI) - archivos muy pequeños
-  medium: '/ebook',     // Compresión media (150 DPI) - balance calidad/tamaño
-  low: '/printer',      // Compresión baja (300 DPI) - alta calidad
-  default: '/default',  // Compresión por defecto de Ghostscript
-};
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  let inputPath = '';
-  let outputPath = '';
-
   try {
     const formData = await request.formData();
-    const file = formData.get('file') as File;
-    const compressionLevel = (formData.get('level') as string) || 'medium';
-    
+    const file = formData.get("file") as File;
+    const level = formData.get("level") as string || "recommended";
+
     if (!file) {
       return NextResponse.json(
-        { error: 'No se proporcionó ningún archivo' },
+        { error: "No se proporcionó ningún archivo" },
         { status: 400 }
       );
     }
 
-    if (file.type !== 'application/pdf') {
-      return NextResponse.json(
-        { error: 'El archivo debe ser un PDF' },
-        { status: 400 }
-      );
+    const originalSize = file.size;
+
+    // 1. Iniciar tarea en iLovePDF
+    const startResponse = await fetch("https://api.ilovepdf.com/v1/start/compress", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.ILOVEPDF_PUBLIC_KEY}`,
+      },
+    });
+
+    if (!startResponse.ok) {
+      throw new Error("Error al iniciar compresión");
     }
 
-    // Verificar que Ghostscript está instalado
-    try {
-      await execAsync('gs --version');
-    } catch (error) {
-      return NextResponse.json(
-        { 
-          error: 'Ghostscript no está instalado en el servidor',
-          details: 'Instala Ghostscript: apt-get install ghostscript (Linux) o brew install ghostscript (Mac)'
-        },
-        { status: 500 }
-      );
+    const { server, task } = await startResponse.json();
+
+    // 2. Subir archivo
+    const uploadFormData = new FormData();
+    uploadFormData.append("task", task);
+    uploadFormData.append("file", file);
+
+    const uploadResponse = await fetch(`https://${server}/v1/upload`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.ILOVEPDF_PUBLIC_KEY}`,
+      },
+      body: uploadFormData,
+    });
+
+    if (!uploadResponse.ok) {
+      throw new Error("Error al subir archivo");
     }
 
-    // Crear archivos temporales
-    const tempDir = tmpdir();
-    const uniqueId = randomUUID();
-    inputPath = join(tempDir, `input-${uniqueId}.pdf`);
-    outputPath = join(tempDir, `output-${uniqueId}.pdf`);
+    const uploadData = await uploadResponse.json();
+    const serverFilename = uploadData.server_filename;
 
-    // Guardar el archivo subido
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(inputPath, buffer);
+    // 3. Procesar compresión
+    const processResponse = await fetch(`https://${server}/v1/process`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${process.env.ILOVEPDF_PUBLIC_KEY}`,
+      },
+      body: JSON.stringify({
+        task,
+        tool: "compress",
+        files: [{ server_filename: serverFilename, filename: file.name }],
+        compression_level: level, // extreme, recommended, low
+      }),
+    });
 
-    const originalSize = buffer.byteLength;
+    if (!processResponse.ok) {
+      throw new Error("Error al procesar compresión");
+    }
 
-    // Comando de Ghostscript para comprimir
-    const setting = COMPRESSION_SETTINGS[compressionLevel as keyof typeof COMPRESSION_SETTINGS] || COMPRESSION_SETTINGS.medium;
-    
-    const gsCommand = `gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=${setting} -dNOPAUSE -dQUIET -dBATCH -dDetectDuplicateImages=true -dCompressFonts=true -r150 -sOutputFile="${outputPath}" "${inputPath}"`;
+    const processData = await processResponse.json();
 
-    // Ejecutar Ghostscript
-    await execAsync(gsCommand, { maxBuffer: 50 * 1024 * 1024 }); // 50MB buffer
+    // 4. Descargar archivo comprimido
+    const downloadUrl = `https://${server}/v1/download/${task}`;
+    const downloadResponse = await fetch(downloadUrl, {
+      headers: {
+        Authorization: `Bearer ${process.env.ILOVEPDF_PUBLIC_KEY}`,
+      },
+    });
 
-    // Leer el archivo comprimido
-    const compressedBuffer = await readFile(outputPath);
+    if (!downloadResponse.ok) {
+      throw new Error("Error al descargar archivo");
+    }
+
+    const compressedBuffer = await downloadResponse.arrayBuffer();
     const compressedSize = compressedBuffer.byteLength;
     const compressionRate = Math.round(((originalSize - compressedSize) / originalSize) * 100);
 
-    // Limpiar archivos temporales
-    await unlink(inputPath);
-    await unlink(outputPath);
-
-    // Retornar el PDF comprimido
+    // Retornar PDF comprimido
     return new NextResponse(compressedBuffer, {
       status: 200,
       headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="${file.name.replace('.pdf', '')}_comprimido.pdf"`,
-        'X-Original-Size': originalSize.toString(),
-        'X-Compressed-Size': compressedSize.toString(),
-        'X-Compression-Rate': compressionRate.toString(),
-        'X-Compression-Level': compressionLevel,
+        "Content-Type": "application/pdf",
+        "Content-Disposition": `attachment; filename="${file.name.replace('.pdf', '')}_comprimido.pdf"`,
+        "X-Original-Size": originalSize.toString(),
+        "X-Compressed-Size": compressedSize.toString(),
+        "X-Compression-Rate": compressionRate.toString(),
       },
     });
 
   } catch (error) {
-    console.error('Error comprimiendo PDF:', error);
-    
-    // Limpiar archivos temporales en caso de error
-    try {
-      if (inputPath) await unlink(inputPath);
-      if (outputPath) await unlink(outputPath);
-    } catch (cleanupError) {
-      console.error('Error limpiando archivos temporales:', cleanupError);
-    }
-
+    console.error("Error:", error);
     return NextResponse.json(
       { 
-        error: 'Error al procesar el PDF',
-        details: error instanceof Error ? error.message : 'Error desconocido'
+        error: "Error al comprimir PDF",
+        details: error instanceof Error ? error.message : "Error desconocido"
       },
       { status: 500 }
     );
   }
 }
 
-// Configuración para archivos grandes
 export const config = {
   api: {
     bodyParser: false,
-    responseLimit: '50mb',
+    responseLimit: "50mb",
   },
 };
+
+/*
+Archivo .env.local:
+ILOVEPDF_PUBLIC_KEY=tu_key_aqui
+
+Para obtener tu API key:
+1. Regístrate en https://developer.ilovepdf.com/
+2. Crea un proyecto
+3. Copia tu "Public key"
+4. Plan gratuito: 250 archivos/mes
+*/
