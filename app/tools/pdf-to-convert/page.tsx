@@ -238,10 +238,10 @@ export default function PDFConverter() {
 
   if (!mode) {
     return (
-      <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+      <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-lineal-to-br from-blue-50 via-purple-50 to-pink-50">
         <div className="bg-white shadow-2xl p-8 rounded-2xl w-full max-w-5xl">
           <div className="text-center mb-8">
-            <h1 className="text-4xl font-bold mb-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Conversor Universal de Documentos</h1>
+            <h1 className="text-4xl font-bold mb-2 bg-lineal-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">Conversor Universal de Documentos</h1>
             <p className="text-gray-600">Convierte entre PDF, imágenes, Word y Excel</p>
             <p className="text-xs text-green-600 mt-2">✓ Procesamiento 100% local - Sin subir archivos</p>
           </div>
@@ -266,7 +266,7 @@ export default function PDFConverter() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+    <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-lineal-to-br from-blue-50 via-purple-50 to-pink-50">
       <div className="bg-white shadow-2xl p-8 rounded-2xl w-full max-w-3xl">
         <button onClick={() => { setMode(null); setFiles([]); setResult(null); setError(""); }} className="text-gray-600 hover:text-gray-800 mb-6 flex items-center gap-2">← Volver al menú</button>
         <div className="text-center mb-8">
@@ -318,7 +318,7 @@ export default function PDFConverter() {
 
         {error && <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">{error}</div>}
 
-        <button onClick={handleConvert} disabled={files.length === 0 || loading} className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl w-full font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2">
+        <button onClick={handleConvert} disabled={files.length === 0 || loading} className="bg-lineal-to-r from-blue-600 via-purple-600 to-pink-600 text-white px-6 py-3 rounded-xl w-full font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2">
           {loading ? <><Loader2 className="w-5 h-5 animate-spin" />Procesando...</> : "Convertir"}
         </button>
 
