@@ -8,7 +8,7 @@ export default function PrivacidadPage() {
         <div className="text-center mb-12">
           <Lock className="w-16 h-16 mx-auto mb-4 text-blue-600" />
           <h1 className="text-4xl font-bold mb-4">Política de Privacidad</h1>
-          <p className="text-gray-600">Última actualización: Noviembre 2024</p>
+          <p className="text-gray-600">Última actualización: Noviembre 2025</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 space-y-8">
@@ -16,9 +16,14 @@ export default function PrivacidadPage() {
             <div className="flex gap-2">
               <Lock className="w-5 h-5 text-green-600 shrink-0 mt-0.5" />
               <div>
-                <h3 className="font-bold text-green-800 mb-2">Tu privacidad es nuestra prioridad</h3>
+                <h3 className="font-bold text-green-800 mb-2">
+                  Tu privacidad es nuestra prioridad
+                </h3>
                 <p className="text-gray-700 text-sm">
-                  El procesamiento de tus archivos se realiza principalmente en tu navegador (procesamiento local). Esto significa que tus documentos NO se suben a nuestros servidores en la mayoría de los casos.
+                  El procesamiento de tus archivos se realiza principalmente en
+                  tu navegador (procesamiento local). Esto significa que tus
+                  documentos NO se suben a nuestros servidores en la mayoría de
+                  los casos.
                 </p>
               </div>
             </div>
@@ -29,28 +34,33 @@ export default function PrivacidadPage() {
               <Eye className="w-6 h-6 text-blue-600" />
               1. Información que Recopilamos
             </h2>
-            
-            <h3 className="text-xl font-semibold mb-3 mt-6">1.1 Archivos que Procesas</h3>
+
+            <h3 className="text-xl font-semibold mb-3 mt-6">
+              1.1 Archivos que Procesas
+            </h3>
             <p className="text-gray-700 leading-relaxed mb-3">
-              La mayoría de nuestras herramientas procesan tus archivos completamente en tu navegador (procesamiento del lado del cliente). Esto significa que:
+              La mayoría de nuestras herramientas procesan tus archivos
+              completamente en tu navegador (procesamiento del lado del
+              cliente). Esto significa que:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
               <li>Tus archivos NUNCA se envían a nuestros servidores</li>
               <li>El procesamiento ocurre directamente en tu dispositivo</li>
               <li>Nadie más tiene acceso a tus documentos</li>
-              <li>Los archivos no se almacenan ni se guardan en ningún lugar</li>
+              <li>
+                Los archivos no se almacenan ni se guardan en ningún lugar
+              </li>
             </ul>
 
-            <h3 className="text-xl font-semibold mb-3 mt-6">1.2 Información de Uso</h3>
+            <h3 className="text-xl font-semibold mb-3 mt-6">
+              1.2 Información de Uso
+            </h3>
             <p className="text-gray-700 leading-relaxed mb-3">
               Recopilamos información anónima sobre cómo utilizas nuestro sitio:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
               <li>Páginas visitadas y herramientas utilizadas</li>
               <li>Tipo de navegador y sistema operativo</li>
-              <li>Fecha y hora de las visitas</li>
-              <li>Dirección IP (anonimizada)</li>
-              <li>País y ciudad aproximados</li>
             </ul>
           </section>
 
@@ -70,11 +80,14 @@ export default function PrivacidadPage() {
               <li>Generar estadísticas anónimas de uso</li>
             </ul>
             <p className="text-gray-700 leading-relaxed mt-4">
-              <strong>NO vendemos, alquilamos ni compartimos tu información personal con terceros para fines de marketing.</strong>
+              <strong>
+                NO vendemos, alquilamos ni compartimos tu información personal
+                con terceros para fines de marketing.
+              </strong>
             </p>
           </section>
 
-          <section>
+          {/* <section>
             <h2 className="text-2xl font-bold mb-4 flex items-center gap-2">
               <Cookie className="w-6 h-6 text-blue-600" />
               3. Cookies y Tecnologías Similares
@@ -104,9 +117,9 @@ export default function PrivacidadPage() {
                 aboutcookies.org
               </a>
             </p>
-          </section>
+          </section> */}
 
-          <section>
+          {/* <section>
             <h2 className="text-2xl font-bold mb-4">4. Google AdSense</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               Utilizamos Google AdSense para mostrar anuncios en nuestro sitio. Google utiliza cookies para servir anuncios basados en las visitas previas de un usuario a este u otros sitios web.
@@ -117,15 +130,20 @@ export default function PrivacidadPage() {
                 Configuración de anuncios de Google
               </a>
             </p>
-          </section>
+          </section> */}
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">5. Seguridad de los Datos</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              3. Seguridad de los Datos
+            </h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              Implementamos medidas de seguridad técnicas y organizativas para proteger tu información:
+              Implementamos medidas de seguridad técnicas y organizativas para
+              proteger tu información:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li>Procesamiento local en el navegador para máxima privacidad</li>
+              <li>
+                Procesamiento local en el navegador para máxima privacidad
+              </li>
               <li>Conexiones HTTPS encriptadas</li>
               <li>No almacenamiento de archivos procesados</li>
               <li>Acceso restringido a datos de analytics</li>
@@ -134,67 +152,95 @@ export default function PrivacidadPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">6. Tus Derechos</h2>
+            <h2 className="text-2xl font-bold mb-4">4. Tus Derechos</h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               Tienes derecho a:
             </p>
             <ul className="list-disc list-inside space-y-2 text-gray-700 ml-4">
-              <li><strong>Acceso:</strong> Solicitar información sobre qué datos personales tenemos sobre ti</li>
-              <li><strong>Rectificación:</strong> Corregir cualquier información inexacta</li>
-              <li><strong>Eliminación:</strong> Solicitar la eliminación de tus datos personales</li>
-              <li><strong>Oposición:</strong> Oponerte al procesamiento de tus datos personales</li>
-              <li><strong>Portabilidad:</strong> Recibir tus datos en un formato estructurado</li>
+              <li>
+                <strong>Acceso:</strong> Solicitar información sobre qué datos
+                personales tenemos sobre ti
+              </li>
+              <li>
+                <strong>Rectificación:</strong> Corregir cualquier información
+                inexacta
+              </li>
+              <li>
+                <strong>Eliminación:</strong> Solicitar la eliminación de tus
+                datos personales
+              </li>
+              <li>
+                <strong>Oposición:</strong> Oponerte al procesamiento de tus
+                datos personales
+              </li>
+              <li>
+                <strong>Portabilidad:</strong> Recibir tus datos en un formato
+                estructurado
+              </li>
             </ul>
             <p className="text-gray-700 leading-relaxed mt-4">
               Para ejercer cualquiera de estos derechos, contáctanos en{" "}
-              <a href="mailto:privacidad@pdftools.com" className="text-blue-600 hover:underline">
-                privacidad@pdftools.com
+              <a
+                href="mailto:soportepdf@pdfconvertools.com"
+                className="text-blue-600 hover:underline"
+              >
+                soportepdf@pdfconvertools.com
               </a>
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">7. Retención de Datos</h2>
+            <h2 className="text-2xl font-bold mb-4">5. Retención de Datos</h2>
             <p className="text-gray-700 leading-relaxed">
-              Como la mayoría del procesamiento ocurre localmente en tu navegador, no retenemos tus archivos. Los datos de analytics se retienen por un período máximo de 26 meses y luego se eliminan automáticamente.
+              Como la mayoría del procesamiento ocurre localmente en tu
+              navegador, no retenemos tus archivos.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">8. Enlaces a Otros Sitios</h2>
+            <h2 className="text-2xl font-bold mb-4">
+              6. Cambios en esta Política
+            </h2>
             <p className="text-gray-700 leading-relaxed">
-              Nuestro sitio puede contener enlaces a sitios web de terceros. No somos responsables de las prácticas de privacidad de estos sitios. Te recomendamos leer las políticas de privacidad de cualquier sitio web que visites.
+              Podemos actualizar esta política de privacidad ocasionalmente. Te
+              notificaremos sobre cualquier cambio publicando la nueva política
+              en esta página y actualizando la fecha de "última actualización".
+              Te recomendamos revisar esta página periódicamente.
             </p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold mb-4">9. Cambios en esta Política</h2>
+            <h2 className="text-2xl font-bold mb-4">7. Contacto</h2>
             <p className="text-gray-700 leading-relaxed">
-              Podemos actualizar esta política de privacidad ocasionalmente. Te notificaremos sobre cualquier cambio publicando la nueva política en esta página y actualizando la fecha de "última actualización". Te recomendamos revisar esta página periódicamente.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4">10. Menores de Edad</h2>
-            <p className="text-gray-700 leading-relaxed">
-              Nuestro servicio no está dirigido a menores de 13 años. No recopilamos conscientemente información personal de menores de 13 años. Si eres padre/madre y descubres que tu hijo nos ha proporcionado información personal, contáctanos.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold mb-4">11. Contacto</h2>
-            <p className="text-gray-700 leading-relaxed">
-              Si tienes preguntas sobre esta política de privacidad, contáctanos:
+              Si tienes preguntas sobre esta política de privacidad,
+              contáctanos:
             </p>
             <ul className="space-y-2 text-gray-700 mt-3">
-              <li>Email: <a href="mailto:privacidad@pdftools.com" className="text-blue-600 hover:underline">privacidad@pdftools.com</a></li>
-              <li>Página de contacto: <Link href="/contacto" className="text-blue-600 hover:underline">Formulario de contacto</Link></li>
+              <li>
+                Email:{" "}
+                <a
+                  href="mailto:soportepdf@pdfconvertools.com"
+                  className="text-blue-600 hover:underline"
+                >
+                  soportepdf@pdfconvertools.com
+                </a>
+              </li>
+              <li>
+                Página de contacto:{" "}
+                <Link
+                  href="/contacto"
+                  className="text-blue-600 hover:underline"
+                >
+                  Formulario de contacto
+                </Link>
+              </li>
             </ul>
           </section>
 
           <div className="border-t pt-8 mt-8">
             <p className="text-sm text-gray-500 text-center">
-              Esta política de privacidad fue actualizada por última vez el 13 de noviembre de 2024.
+              Esta política de privacidad fue actualizada por última vez el 13
+              de noviembre de 2025.
             </p>
           </div>
         </div>

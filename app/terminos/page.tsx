@@ -144,8 +144,8 @@ export default function TerminosPage() {
                 página de contacto
               </Link>
               {" "}o enviando un email a{" "}
-              <a href="mailto:legal@pdftools.com" className="text-blue-600 hover:underline">
-                legal@pdftools.com
+              <a href="mailto:soportepdf@pdfconvertools.com" className="text-blue-600 hover:underline">
+                soportepdf@pdfconvertools.com
               </a>
             </p>
           </section>
