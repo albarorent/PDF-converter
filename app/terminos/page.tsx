@@ -8,7 +8,7 @@ export default function TerminosPage() {
         <div className="text-center mb-12">
           <FileText className="w-16 h-16 mx-auto mb-4 text-blue-600" />
           <h1 className="text-4xl font-bold mb-4">Términos y Condiciones</h1>
-          <p className="text-gray-600">Última actualización: Noviembre 2024</p>
+          <p className="text-gray-600">Última actualización: Noviembre 2025</p>
         </div>
 
         <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 space-y-8">
